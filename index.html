@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Muhammad Shoaib Anwar | Electrical Engineering Portfolio</title>
 
 <style>
+
 :root {
     --bg: #0d1117;
     --text: #e6edf3;
@@ -28,32 +30,8 @@ body {
     transition: 0.3s;
 }
 
-/* HEADER */
-header {
-    padding: 60px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #161b22, #0d1117);
-}
+/* Toggle button */
 
-header img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 4px solid var(--accent);
-    margin-bottom: 15px;
-}
-
-header h1 {
-    margin: 10px 0 0;
-    font-size: 40px;
-}
-
-header p {
-    color: #8b949e;
-    font-size: 18px;
-}
-
-/* TOGGLE BUTTON */
 .toggle-btn {
     position: fixed;
     top: 15px;
@@ -64,19 +42,52 @@ header p {
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 14px;
 }
 
-/* SECTIONS */
+/* Header */
+
+header {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #161b22, #0d1117);
+    animation: fadeDown 1s ease;
+}
+
+header img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid var(--accent);
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+header img:hover {
+    transform: scale(1.05);
+}
+
+header h1 {
+    margin: 10px 0;
+    font-size: 40px;
+    color: var(--text);
+}
+
+header p {
+    color: var(--text);
+    opacity: 0.7;
+}
+
+/* Sections */
+
 section {
     max-width: 1000px;
     margin: auto;
     padding: 40px 20px;
+    animation: fadeUp 1s ease;
 }
 
 h2 {
     color: var(--accent);
-    margin-bottom: 10px;
 }
 
 .grid {
@@ -90,28 +101,51 @@ h2 {
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #30363d;
-    transition: 0.2s;
+    transition: 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
+    border-color: var(--accent);
 }
 
-/* FOOTER */
+/* Footer */
+
 footer {
     text-align: center;
     padding: 20px;
     background: var(--card);
-    margin-top: 40px;
     color: #8b949e;
-    font-size: 14px;
 }
 
 a {
     color: var(--accent);
-    text-decoration: none;
 }
-a:hover { text-decoration: underline; }
+
+/* Animations */
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 </style>
 </head>
 
@@ -120,16 +154,21 @@ a:hover { text-decoration: underline; }
 <button class="toggle-btn" onclick="toggleMode()">🌙 / ☀️</button>
 
 <header>
-    <!-- Replace profile.jpg with your image -->
-    <img src="profile.jpg" alt="Profile Picture">
 
-    <h1>Muhammad Shoaib Anwar</h1>
-    <p>Electrical Engineering Student | Digital Systems | Power & Automation | Engineering Projects</p>
+<img src="profile.jpg" alt="Profile Picture">
+
+<h1>Muhammad Shoaib Anwar</h1>
+
+<p>
+Electrical Engineering Student | Digital Systems | Power & Automation | Engineering Projects
+</p>
+
 </header>
 
 <section>
 
 <h2>About Me</h2>
+
 <p>
 I am an Electrical Engineering student passionate about understanding how systems work at both hardware and logical levels. 
 My interests include digital logic, automation, and engineering problem-solving. I enjoy working on technical projects, 
@@ -137,27 +176,36 @@ documenting my work, and collaborating in team environments while continuously i
 </p>
 
 <h2>Projects</h2>
+
 <div class="grid">
 
 <div class="card">
 <h3>Digital Logic Design Projects</h3>
-<p>Designed counters, flip-flops, and sequential circuits using NI Multisim, including multi-cycle digital event counter systems.</p>
+<p>
+Designed counters, flip-flops, and sequential circuits using NI Multisim, including multi-cycle digital event counter systems.
+</p>
 </div>
 
 <div class="card">
 <h3>Control System Simulation (C++)</h3>
-<p>Developed simulation-based projects such as automated water tank control logic and system behavior modeling using C++.</p>
+<p>
+Developed simulation-based projects such as automated water tank control logic and system behavior modeling using C++.
+</p>
 </div>
 
 <div class="card">
 <h3>Automation & Relay Control System</h3>
-<p>Implemented relay-based AC appliance control using ESP32 and switching logic for basic automation applications.</p>
+<p>
+Implemented relay-based AC appliance control using ESP32 and switching logic for basic automation applications.
+</p>
 </div>
 
 </div>
 
 <h2>Skills</h2>
+
 <div class="grid">
+
 <div class="card">
 <ul>
 <li>Digital Logic Design</li>
@@ -175,25 +223,49 @@ documenting my work, and collaborating in team environments while continuously i
 <li>Engineering Project Work</li>
 </ul>
 </div>
+
 </div>
 
 <h2>Contact</h2>
+
 <p>
-📧 Email: <a href="mailto:ranamuhammadshoaib194@gmail.com">ranamuhammadshoaib194@gmail.com</a><br>
-🔗 GitHub: <a href="https://github.com/muhammadshoaibanwar-ee" target="_blank">github.com/muhammadshoaibanwar-ee</a><br>
-💼 LinkedIn: <a href="https://www.linkedin.com/in/muhammad-shoaib-ee" target="_blank">linkedin.com/in/muhammad-shoaib-ee</a>
+
+📧 Email:
+<a href="mailto:ranamuhammadshoaib194@gmail.com">
+ranamuhammadshoaib194@gmail.com
+</a>
+
+<br><br>
+
+🔗 GitHub:
+<a href="https://github.com/muhammadshoaibanwar-ee" target="_blank">
+github.com/muhammadshoaibanwar-ee
+</a>
+
+<br><br>
+
+💼 LinkedIn:
+<a href="https://www.linkedin.com/in/muhammad-shoaib-ee" target="_blank">
+linkedin.com/in/muhammad-shoaib-ee
+</a>
+
 </p>
 
 </section>
 
 <footer>
+
 © 2026 Muhammad Shoaib Anwar
+
 </footer>
 
 <script>
-function toggleMode() {
+
+function toggleMode()
+{
     document.body.classList.toggle("light-mode");
 }
+
 </script>
 
 </body>
