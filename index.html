@@ -1,117 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Shoaib Anwar | Electrical Engineer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Shoaib Anwar | Electrical Engineering Portfolio</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #0d1117;
-            color: white;
-        }
+<style>
+:root {
+    --bg: #0d1117;
+    --text: #e6edf3;
+    --card: #161b22;
+    --accent: #58a6ff;
+}
 
-        header {
-            background-color: #161b22;
-            padding: 40px;
-            text-align: center;
-        }
+.light-mode {
+    --bg: #f5f5f5;
+    --text: #111;
+    --card: #ffffff;
+    --accent: #0066cc;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 36px;
-        }
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+}
 
-        header p {
-            color: #8b949e;
-            font-size: 18px;
-        }
+/* HEADER */
+header {
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #161b22, #0d1117);
+}
 
-        section {
-            padding: 40px;
-            max-width: 900px;
-            margin: auto;
-        }
+header img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 4px solid var(--accent);
+    margin-bottom: 15px;
+}
 
-        h2 {
-            color: #58a6ff;
-        }
+header h1 {
+    margin: 10px 0 0;
+    font-size: 40px;
+}
 
-        .project {
-            background: #161b22;
-            padding: 20px;
-            margin-top: 15px;
-            border-radius: 8px;
-        }
+header p {
+    color: #8b949e;
+    font-size: 18px;
+}
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #161b22;
-            margin-top: 40px;
-        }
-    </style>
+/* TOGGLE BUTTON */
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 8px 14px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
+/* SECTIONS */
+section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+h2 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #30363d;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: var(--card);
+    margin-top: 40px;
+    color: #8b949e;
+    font-size: 14px;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+</style>
 </head>
+
 <body>
 
+<button class="toggle-btn" onclick="toggleMode()">🌙 / ☀️</button>
+
 <header>
+    <!-- Replace profile.jpg with your image -->
+    <img src="profile.jpg" alt="Profile Picture">
+
     <h1>Muhammad Shoaib Anwar</h1>
-    <p>Electrical Engineering Student | Embedded Systems | Digital Logic | Automation</p>
+    <p>Electrical Engineering Student | Digital Systems | Power & Automation | Engineering Projects</p>
 </header>
 
 <section>
 
-    <h2>About Me</h2>
-    <p>
-        I am an Electrical Engineering undergraduate with hands-on experience in embedded systems,
-        digital logic design, and engineering simulations. I specialize in designing efficient,
-        practical engineering solutions and developing real-world hardware projects.
-    </p>
+<h2>About Me</h2>
+<p>
+I am an Electrical Engineering student passionate about understanding how systems work at both hardware and logical levels. 
+My interests include digital logic, automation, and engineering problem-solving. I enjoy working on technical projects, 
+documenting my work, and collaborating in team environments while continuously improving my engineering skills.
+</p>
 
-    <h2>Projects</h2>
+<h2>Projects</h2>
+<div class="grid">
 
-    <div class="project">
-        <h3>Digital Logic Projects</h3>
-        <p>Flip-flops, counters, and sequential circuits designed using Multisim.</p>
-    </div>
+<div class="card">
+<h3>Digital Logic Design Projects</h3>
+<p>Designed counters, flip-flops, and sequential circuits using NI Multisim, including multi-cycle digital event counter systems.</p>
+</div>
 
-    <div class="project">
-        <h3>Embedded Systems</h3>
-        <p>Microprocessor and microcontroller based system design and programming.</p>
-    </div>
+<div class="card">
+<h3>Control System Simulation (C++)</h3>
+<p>Developed simulation-based projects such as automated water tank control logic and system behavior modeling using C++.</p>
+</div>
 
-    <div class="project">
-        <h3>Automation Systems</h3>
-        <p>Relay control systems, automation circuits, and control logic implementation.</p>
-    </div>
+<div class="card">
+<h3>Automation & Relay Control System</h3>
+<p>Implemented relay-based AC appliance control using ESP32 and switching logic for basic automation applications.</p>
+</div>
 
-    <h2>Skills</h2>
+</div>
 
-    <p>
-        • Embedded Systems<br>
-        • Digital Logic Design<br>
-        • Microprocessors<br>
-        • C++ Programming<br>
-        • Circuit Design<br>
-        • Multisim Simulation
-    </p>
+<h2>Skills</h2>
+<div class="grid">
+<div class="card">
+<ul>
+<li>Digital Logic Design</li>
+<li>C++ Programming (Simulation & Logic)</li>
+<li>Circuit Design & Simulation (NI Multisim)</li>
+<li>Technical Documentation</li>
+</ul>
+</div>
 
-    <h2>Contact</h2>
+<div class="card">
+<ul>
+<li>Microsoft Word, Excel, PowerPoint</li>
+<li>Analytical Thinking & Problem Solving</li>
+<li>Team Collaboration</li>
+<li>Engineering Project Work</li>
+</ul>
+</div>
+</div>
 
-    <p>
-        Email: your-email@example.com<br>
-        GitHub: github.com/muhammadshoaibanwar-ee<br>
-        LinkedIn: linkedin.com/in/your-linkedin
-    </p>
+<h2>Contact</h2>
+<p>
+📧 Email: <a href="mailto:ranamuhammadshoaib194@gmail.com">ranamuhammadshoaib194@gmail.com</a><br>
+🔗 GitHub: <a href="https://github.com/muhammadshoaibanwar-ee" target="_blank">github.com/muhammadshoaibanwar-ee</a><br>
+💼 LinkedIn: <a href="https://www.linkedin.com/in/muhammad-shoaib-ee" target="_blank">linkedin.com/in/muhammad-shoaib-ee</a>
+</p>
 
 </section>
 
 <footer>
-    © 2026 Muhammad Shoaib Anwar
+© 2026 Muhammad Shoaib Anwar — Electrical Engineering Portfolio
 </footer>
+
+<script>
+function toggleMode() {
+    document.body.classList.toggle("light-mode");
+}
+</script>
 
 </body>
 </html>
