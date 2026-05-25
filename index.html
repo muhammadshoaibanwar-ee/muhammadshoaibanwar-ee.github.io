@@ -1,279 +1,1557 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Muhammad Shoaib Anwar | Electrical Engineering Portfolio</title>
-
+<meta name="description" content="Muhammad Shoaib Anwar — Electrical Engineering student at NUST. Embedded systems, industrial automation, analog circuits, digital logic design.">
+<title>Muhammad Shoaib Anwar — Electrical Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-
+/* ═══════════════════════════════════════════════════════════
+   THEME VARIABLES
+═══════════════════════════════════════════════════════════ */
 :root {
-    --bg: #0d1117;
-    --text: #e6edf3;
-    --card: #161b22;
-    --accent: #58a6ff;
+  --accent:     #d96846;
+  --ar:         217,104,70;
+  --green:      #7cac8c;
+  --gr:         124,172,140;
+  --r:          12px;
+  --rl:         18px;
+  --tr:         0.3s cubic-bezier(0.4,0,0.2,1);
+  --fd:         'Epilogue',sans-serif;
+  --fb:         'DM Sans',sans-serif;
+  --fm:         'JetBrains Mono',monospace;
+}
+[data-theme="dark"] {
+  --bg:    #0a1a1c;
+  --bg2:   #0d2224;
+  --bg3:   #132c2e;
+  --card:  rgba(13,34,36,0.94);
+  --bo:    rgba(124,172,140,0.12);
+  --boh:   rgba(217,104,70,0.36);
+  --t1:    #f0ddc8;
+  --t2:    #96a896;
+  --t3:    #587868;
+  --nbg:   rgba(10,26,28,0.90);
+  --sh:    0 0 32px rgba(217,104,70,0.12);
+  --sh2:   0 0 24px rgba(124,172,140,0.10);
+}
+[data-theme="light"] {
+  --bg:    #f5e8da;
+  --bg2:   #ecdfd0;
+  --bg3:   #e3d5c3;
+  --card:  rgba(255,252,248,0.97);
+  --bo:    rgba(89,98,53,0.13);
+  --boh:   rgba(217,104,70,0.4);
+  --t1:    #26281a;
+  --t2:    #565446;
+  --t3:    #888776;
+  --nbg:   rgba(245,232,218,0.92);
+  --sh:    0 4px 24px rgba(217,104,70,0.10);
+  --sh2:   0 4px 16px rgba(89,98,53,0.09);
 }
 
-.light-mode {
-    --bg: #f5f5f5;
-    --text: #111;
-    --card: #ffffff;
-    --accent: #0066cc;
+/* ═══════════════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--fb);background:var(--bg);color:var(--t1);
+  line-height:1.7;overflow-x:hidden;
+  transition:background .4s ease,color .4s ease
+}
+img{max-width:100%;height:auto;display:block}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(var(--ar),.3);border-radius:3px}
+::selection{background:rgba(var(--ar),.2)}
+
+/* ═══════════════════════════════════════════════════════════
+   TYPOGRAPHY HELPERS
+═══════════════════════════════════════════════════════════ */
+.stag{
+  font-family:var(--fm);font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:10px;display:block
+}
+.sh2{
+  font-family:var(--fd);font-size:clamp(1.85rem,4vw,2.65rem);
+  font-weight:800;color:var(--t1);line-height:1.22;
+  margin-bottom:12px;overflow:visible
+}
+.sh2 span{color:var(--accent)}
+.sp{font-size:1rem;color:var(--t2);max-width:560px;line-height:1.82;margin-bottom:50px}
+
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════════════ */
+.ctr{max-width:1120px;margin:0 auto;padding:0 24px}
+.sec{padding:96px 0}
+.divd{height:1px;background:linear-gradient(90deg,transparent,var(--bo),transparent)}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════════════ */
+.bta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:8px;
+  background:var(--accent);color:#fff;
+  font-family:var(--fb);font-weight:600;font-size:.92rem;
+  box-shadow:0 0 22px rgba(var(--ar),.28);transition:all var(--tr)
+}
+.bta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(var(--ar),.42)}
+.btb{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:8px;
+  border:1px solid var(--bo);color:var(--t1);
+  background:var(--card);backdrop-filter:blur(10px);
+  font-family:var(--fb);font-weight:500;font-size:.92rem;
+  transition:all var(--tr)
+}
+.btb:hover{border-color:var(--boh);color:var(--accent);transform:translateY(-2px);box-shadow:var(--sh)}
+
+/* ═══════════════════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:66px;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--nbg);backdrop-filter:blur(22px);
+  border-bottom:1px solid transparent;transition:all var(--tr)
+}
+.nav.sc{border-bottom-color:var(--bo);box-shadow:0 4px 22px rgba(0,0,0,.12)}
+.nav-logo{
+  font-family:var(--fd);font-size:.88rem;font-weight:800;
+  color:var(--t1);letter-spacing:-.01em;white-space:nowrap;text-decoration:none
+}
+.nav-logo em{color:var(--accent);font-style:normal}
+.nav-r{display:flex;align-items:center;gap:24px}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none}
+.nav-links a{
+  font-family:var(--fm);font-size:.7rem;color:var(--t2);
+  letter-spacing:.05em;transition:color var(--tr);position:relative;
+  text-decoration:none
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;
+  width:0;height:1px;background:var(--accent);transition:width var(--tr)
+}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{width:100%}
+.theme-btn{
+  width:36px;height:36px;border-radius:9px;
+  background:var(--card);border:1px solid var(--bo);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:.95rem;transition:all var(--tr);flex-shrink:0
+}
+.theme-btn:hover{border-color:var(--boh);box-shadow:var(--sh)}
+.ham{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:4px
+}
+.ham span{display:block;width:22px;height:2px;background:var(--t1);border-radius:2px;transition:var(--tr)}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;padding:0 24px
+}
+#osc{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.7}
+.hero-ga{
+  position:absolute;top:12%;left:-8%;width:500px;height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--ar),.05) 0%,transparent 68%);
+  pointer-events:none
+}
+.hero-gb{
+  position:absolute;bottom:5%;right:-5%;width:380px;height:380px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(var(--gr),.06) 0%,transparent 68%);
+  pointer-events:none
+}
+.hero-wrap{
+  max-width:1120px;margin:0 auto;width:100%;
+  position:relative;z-index:2;padding-top:74px
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 16px;border-radius:50px;margin-bottom:28px;
+  background:rgba(var(--ar),.08);border:1px solid rgba(var(--ar),.2);
+  font-family:var(--fm);font-size:.68rem;color:var(--accent);letter-spacing:.1em;
+  animation:fup .8s ease both
+}
+.hbdot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+.hero-name{
+  font-family:var(--fd);font-weight:900;
+  font-size:clamp(2.6rem,6.5vw,5rem);
+  line-height:1.06;letter-spacing:-.03em;
+  margin-bottom:18px;overflow:visible;
+  animation:fup .8s ease .1s both
+}
+.hero-name .n1{display:block;color:var(--t1)}
+.hero-name .n2{display:block;color:var(--accent)}
+.hero-tw{
+  display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  animation:fup .8s ease .2s both
+}
+.tw-pre{font-family:var(--fm);font-size:.9rem;color:var(--t3)}
+.tw-out{font-family:var(--fm);font-size:.9rem;color:var(--green);min-width:280px}
+.tw-cur{
+  display:inline-block;width:2px;height:.9em;background:var(--green);
+  margin-left:2px;vertical-align:middle;animation:blink .75s step-end infinite
+}
+.hero-desc{
+  font-size:1.04rem;color:var(--t2);max-width:540px;
+  line-height:1.88;margin-bottom:40px;animation:fup .8s ease .3s both
+}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;animation:fup .8s ease .4s both}
+.hero-scroll{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  color:var(--t3);font-family:var(--fm);font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  animation:fup 1s ease 1.2s both
+}
+.hsl{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:sl 2s ease-in-out infinite}
+@keyframes sl{0%{height:0;opacity:1}100%{height:40px;opacity:0}}
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.65)}}
+
+/* ═══════════════════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════════════════ */
+.about{background:var(--bg2)}
+.about-g{display:grid;grid-template-columns:1fr 1.5fr;gap:72px;align-items:start}
+.photo-wrap{position:relative}
+.photo-outer{
+  position:relative;border-radius:var(--rl);overflow:hidden;
+  border:1px solid var(--bo);aspect-ratio:4/5;background:var(--bg3)
+}
+.photo-glow{
+  position:absolute;inset:-1px;border-radius:calc(var(--rl)+1px);
+  background:linear-gradient(135deg,var(--accent),var(--green));
+  opacity:.18;z-index:0
+}
+/*
+╔══════════════════════════════════════════════════════════╗
+║  PROFILE PHOTO — HOW TO ADD                             ║
+║                                                          ║
+║  1. Save your photo as "profile.jpg" in the same folder  ║
+║  2. Delete the entire <div class="photo-ph">...</div>    ║
+║  3. Replace it with exactly this:                        ║
+║                                                          ║
+║     <img src="profile.jpg"                               ║
+║          alt="Muhammad Shoaib Anwar"                     ║
+║          style="width:100%;height:100%;                  ║
+║                 object-fit:cover;                        ║
+║                 object-position:center top">             ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝
+*/
+.photo-ph{
+  width:100%;min-height:360px;height:100%;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:10px;padding:20px;
+  background:var(--bg3);position:relative;z-index:1
+}
+.photo-ph svg{opacity:.2;color:var(--t2)}
+.photo-ph p{font-family:var(--fm);font-size:.68rem;color:var(--t3);text-align:center;line-height:1.65}
+.photo-badge{
+  position:absolute;bottom:-14px;right:-14px;z-index:2;
+  width:60px;height:60px;border-radius:13px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;box-shadow:0 8px 20px rgba(var(--ar),.38)
+}
+.about-desc{font-size:1rem;color:var(--t2);line-height:1.9;margin-bottom:30px}
+.about-desc strong{color:var(--t1);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px}
+.stat{
+  padding:18px 12px;background:var(--card);border:1px solid var(--bo);
+  border-radius:var(--r);text-align:center;transition:all var(--tr);
+  backdrop-filter:blur(8px)
+}
+.stat:hover{border-color:var(--boh);box-shadow:var(--sh);transform:translateY(-3px)}
+.stat-n{
+  font-family:var(--fd);font-size:1.85rem;font-weight:900;
+  color:var(--accent);display:block;line-height:1;margin-bottom:5px;overflow:visible
+}
+.stat-l{font-size:.68rem;color:var(--t3);font-family:var(--fm);letter-spacing:.04em}
+
+/* ═══════════════════════════════════════════════════════════
+   EDUCATION
+═══════════════════════════════════════════════════════════ */
+.edu-card{
+  display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:start;
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--rl);
+  padding:42px;backdrop-filter:blur(10px);transition:all var(--tr)
+}
+.edu-card:hover{border-color:var(--boh);box-shadow:var(--sh)}
+.edu-ic{
+  width:78px;height:78px;background:rgba(var(--ar),.08);
+  border:1px solid rgba(var(--ar),.2);border-radius:var(--rl);
+  display:flex;align-items:center;justify-content:center;font-size:2.1rem;flex-shrink:0
+}
+.edu-deg{
+  font-family:var(--fd);font-size:1.3rem;font-weight:800;
+  color:var(--t1);margin-bottom:6px;overflow:visible
+}
+.edu-uni{font-size:.94rem;color:var(--accent);font-weight:600;margin-bottom:5px}
+.edu-dt{font-size:.84rem;color:var(--t2);margin-bottom:20px}
+.edu-tags{display:flex;flex-wrap:wrap;gap:7px}
+.edu-tag{
+  padding:4px 12px;background:rgba(var(--ar),.07);
+  border:1px solid rgba(var(--ar),.16);border-radius:50px;
+  font-size:.68rem;color:var(--accent);font-family:var(--fm)
 }
 
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    margin: 0;
-    background-color: var(--bg);
-    color: var(--text);
-    transition: 0.3s;
+/* ═══════════════════════════════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════════════════════════════ */
+.exp{background:var(--bg2)}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px}
+.exp-col-h{
+  font-family:var(--fd);font-size:1.02rem;font-weight:800;
+  color:var(--t1);margin-bottom:26px;display:flex;align-items:center;gap:10px;
+  overflow:visible
+}
+.exp-cic{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(var(--ar),.08);border:1px solid rgba(var(--ar),.16);
+  display:flex;align-items:center;justify-content:center;font-size:.88rem
+}
+.tl{position:relative}
+.tl::before{
+  content:'';position:absolute;left:12px;top:4px;bottom:4px;
+  width:1px;background:linear-gradient(to bottom,var(--accent),rgba(var(--ar),.06))
+}
+.tl-it{position:relative;padding-left:42px;padding-bottom:32px}
+.tl-it:last-child{padding-bottom:0}
+.tl-dot{
+  position:absolute;left:5px;top:4px;width:14px;height:14px;
+  border-radius:50%;background:var(--bg);border:2px solid var(--accent);
+  box-shadow:0 0 8px rgba(var(--ar),.35)
+}
+.tl-date{font-family:var(--fm);font-size:.64rem;color:var(--accent);letter-spacing:.08em;display:block;margin-bottom:5px}
+.tl-role{font-family:var(--fd);font-size:.96rem;font-weight:800;color:var(--t1);margin-bottom:3px;overflow:visible}
+.tl-org{font-size:.83rem;color:var(--t2);margin-bottom:9px;font-weight:500}
+.tl-ul{list-style:none}
+.tl-ul li{font-size:.82rem;color:var(--t2);padding-left:14px;position:relative;margin-bottom:5px;line-height:1.65}
+.tl-ul li::before{content:'›';position:absolute;left:0;color:var(--green);font-size:.9rem;top:0}
+
+/* ═══════════════════════════════════════════════════════════
+   FEATURED PROJECTS
+═══════════════════════════════════════════════════════════ */
+.feat-list{display:flex;flex-direction:column;gap:40px}
+.feat-card{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--rl);
+  overflow:hidden;backdrop-filter:blur(10px);transition:all var(--tr)
+}
+.feat-card:hover{border-color:var(--boh);box-shadow:0 20px 50px rgba(0,0,0,.15),var(--sh);transform:translateY(-4px)}
+.feat-card.rev{direction:rtl}
+.feat-card.rev>*{direction:ltr}
+
+/* Carousel */
+.carousel{position:relative;overflow:hidden;height:100%;min-height:320px}
+.car-track{display:flex;height:100%;transition:transform .44s cubic-bezier(0.4,0,0.2,1)}
+.car-slide{flex:0 0 100%;height:100%;min-height:320px;position:relative;overflow:hidden}
+.car-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.feat-card:hover .car-slide img{transform:scale(1.04)}
+/*
+╔══════════════════════════════════════════════════════════╗
+║  CAROUSEL IMAGES — GENERAL INSTRUCTIONS                 ║
+║                                                          ║
+║  Each featured project has a carousel for up to         ║
+║  as many images as you want. For each image:            ║
+║                                                          ║
+║  1. Delete a <div class="car-slide car-ph"> block       ║
+║  2. Replace it with:                                     ║
+║                                                          ║
+║     <div class="car-slide">                              ║
+║       <img src="YOUR-PHOTO.jpg" alt="Description">       ║
+║     </div>                                               ║
+║                                                          ║
+║  Add or remove slides freely — dots auto-update.        ║
+╚══════════════════════════════════════════════════════════╝
+*/
+.car-ph{
+  background:var(--bg3);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px
+}
+.car-ph-ic{font-size:2.8rem;opacity:.18}
+.car-ph-tx{font-family:var(--fm);font-size:.66rem;color:var(--t3);text-align:center;line-height:1.6;opacity:.55}
+.car-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(var(--ar),.82);color:#fff;border:none;cursor:pointer;
+  font-size:1.2rem;display:flex;align-items:center;justify-content:center;
+  transition:all var(--tr);z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.22)
+}
+.car-btn:hover{background:var(--accent);transform:translateY(-50%) scale(1.1)}
+.car-prev{left:10px}.car-next{right:10px}
+.car-dots{
+  position:absolute;bottom:11px;left:50%;transform:translateX(-50%);
+  display:flex;gap:5px;z-index:10
+}
+.car-dot{
+  width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.36);
+  border:none;cursor:pointer;transition:all var(--tr);padding:0
+}
+.car-dot.on{background:var(--accent);transform:scale(1.25)}
+
+/* feat body */
+.feat-body{padding:40px 42px;display:flex;flex-direction:column;justify-content:center}
+.feat-num{font-family:var(--fm);font-size:.64rem;color:var(--green);letter-spacing:.15em;margin-bottom:12px;display:block}
+.feat-title{font-family:var(--fd);font-size:1.3rem;font-weight:800;color:var(--t1);line-height:1.28;margin-bottom:14px;overflow:visible}
+.feat-desc{font-size:.89rem;color:var(--t2);line-height:1.84;margin-bottom:20px}
+.feat-specs{
+  padding:13px 15px;border-radius:8px;border-left:2px solid var(--accent);
+  margin-bottom:20px;
+  background:rgba(0,0,0,.14)
+}
+[data-theme="light"] .feat-specs{background:rgba(0,0,0,.04)}
+.feat-spec{display:flex;gap:8px;font-size:.78rem;margin-bottom:5px}
+.feat-spec:last-child{margin-bottom:0}
+.feat-sk{color:var(--accent);font-family:var(--fm);min-width:78px;flex-shrink:0}
+.feat-sv{color:var(--t2)}
+.feat-tags{display:flex;flex-wrap:wrap;gap:6px}
+.feat-tag{
+  padding:3px 10px;background:rgba(var(--gr),.09);
+  border:1px solid rgba(var(--gr),.2);border-radius:50px;
+  font-size:.67rem;color:var(--green);font-family:var(--fm)
 }
 
-/* Toggle button */
+/* ═══════════════════════════════════════════════════════════
+   ACADEMIC PROJECTS
+═══════════════════════════════════════════════════════════ */
+.acad{background:var(--bg2)}
+.acad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px}
+@media(min-width:1025px){.acad-grid>.ac:nth-child(7){grid-column:2}}
+.ac{
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--rl);
+  overflow:hidden;transition:all var(--tr);backdrop-filter:blur(10px);
+  display:flex;flex-direction:column
+}
+.ac:hover{border-color:var(--boh);box-shadow:var(--sh);transform:translateY(-4px)}
+/*
+╔══════════════════════════════════════════════════════════╗
+║  ACADEMIC PROJECT IMAGES                                ║
+║                                                          ║
+║  Each card has a .ac-img container (150px tall).        ║
+║  Delete the <div class="ac-ph">...</div> inside it      ║
+║  and replace with:                                       ║
+║                                                          ║
+║     <img src="YOUR-SCREENSHOT.jpg"                       ║
+║          alt="Project name"                              ║
+║          style="width:100%;height:100%;                  ║
+║                 object-fit:cover">                       ║
+║                                                          ║
+║  Good sources: Multisim screenshots, breadboard          ║
+║  photos, console output, report diagrams.               ║
+╚══════════════════════════════════════════════════════════╝
+*/
+.ac-img{height:148px;overflow:hidden;background:var(--bg3);flex-shrink:0;position:relative}
+.ac-ph{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:5px;background:var(--bg3)
+}
+.ac-ph-ic{font-size:2rem;opacity:.18}
+.ac-ph-tx{font-family:var(--fm);font-size:.6rem;color:var(--t3);opacity:.45}
+.ac-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.ac:hover .ac-img img{transform:scale(1.06)}
+.ac-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.ac-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.ac-ic{
+  width:38px;height:38px;background:rgba(var(--ar),.08);
+  border:1px solid rgba(var(--ar),.13);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0
+}
+.ac-code{font-family:var(--fm);font-size:.6rem;color:var(--t3);text-align:right;line-height:1.55}
+.ac-title{font-family:var(--fd);font-size:.94rem;font-weight:800;color:var(--t1);margin-bottom:8px;line-height:1.3;overflow:visible}
+.ac-desc{font-size:.8rem;color:var(--t2);line-height:1.72;flex:1;margin-bottom:14px}
+.ac-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+.ac-tag{
+  padding:2px 8px;background:rgba(var(--gr),.07);
+  border:1px solid rgba(var(--gr),.14);border-radius:50px;
+  font-size:.62rem;color:var(--green);font-family:var(--fm)
+}
+/* More projects */
+.more-box{
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--rl);
+  padding:30px 34px;backdrop-filter:blur(10px)
+}
+.more-h{font-family:var(--fd);font-size:.98rem;font-weight:800;color:var(--t1);margin-bottom:18px;overflow:visible}
+.more-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;list-style:none}
+.more-grid li{display:flex;align-items:flex-start;gap:8px;font-size:.83rem;color:var(--t2)}
+.more-grid li::before{content:'→';color:var(--accent);font-size:.75rem;flex-shrink:0;margin-top:3px}
+.more-info{line-height:1.5}
+.more-tool{font-family:var(--fm);font-size:.61rem;color:var(--t3);display:block;margin-top:2px}
 
-.toggle-btn {
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    padding: 8px 14px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
+/* ═══════════════════════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════════════════════ */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sk{
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--rl);
+  padding:26px 22px;backdrop-filter:blur(10px);transition:all var(--tr);
+  position:relative;overflow:hidden
+}
+.sk::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),transparent);
+  opacity:0;transition:opacity var(--tr)
+}
+.sk:hover{border-color:var(--boh);box-shadow:var(--sh)}
+.sk:hover::before{opacity:1}
+.sk-ic{
+  width:40px;height:40px;background:rgba(var(--ar),.08);
+  border:1px solid rgba(var(--ar),.15);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;margin-bottom:13px
+}
+.sk-title{font-family:var(--fd);font-size:.97rem;font-weight:800;color:var(--t1);margin-bottom:15px;overflow:visible}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  padding:4px 11px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);border-radius:50px;
+  font-size:.71rem;color:var(--t2);font-family:var(--fm);
+  transition:all var(--tr);white-space:nowrap
+}
+[data-theme="light"] .tag{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.08)}
+.tag:hover,.tag.hl{border-color:rgba(var(--ar),.28);color:var(--accent);background:rgba(var(--ar),.07)}
+
+/* ═══════════════════════════════════════════════════════════
+   INTERESTS
+═══════════════════════════════════════════════════════════ */
+.int-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.int-c{
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--rl);
+  padding:28px 22px;text-align:center;transition:all var(--tr);backdrop-filter:blur(10px)
+}
+.int-c:hover{border-color:var(--boh);box-shadow:var(--sh);transform:translateY(-4px)}
+.int-ic{font-size:2.3rem;display:block;margin-bottom:13px}
+.int-n{font-family:var(--fd);font-size:.98rem;font-weight:800;color:var(--t1);margin-bottom:8px;overflow:visible}
+.int-p{font-size:.8rem;color:var(--t2);line-height:1.68}
+
+/* ═══════════════════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════════════════ */
+.contact-g{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.clinks{display:flex;flex-direction:column;gap:11px;margin-top:4px}
+.clink{
+  display:flex;align-items:center;gap:13px;padding:15px 18px;
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--r);
+  transition:all var(--tr);backdrop-filter:blur(10px);text-decoration:none
+}
+.clink:hover{border-color:var(--boh);box-shadow:var(--sh);transform:translateX(4px)}
+.clink-ic{
+  width:38px;height:38px;background:rgba(var(--ar),.08);
+  border:1px solid rgba(var(--ar),.15);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--t2)
+}
+.clink:hover .clink-ic{color:var(--accent)}
+.clink-lbl{font-size:.62rem;color:var(--t3);font-family:var(--fm);letter-spacing:.06em;display:block;margin-bottom:2px}
+.clink-v{font-size:.87rem;font-weight:500;color:var(--t1);transition:color var(--tr)}
+.clink:hover .clink-v{color:var(--accent)}
+.clink-arr{color:var(--t3);margin-left:auto;font-size:1rem;transition:transform var(--tr)}
+.clink:hover .clink-arr{transform:translateX(4px);color:var(--accent)}
+.avail-card{
+  background:var(--card);border:1px solid var(--bo);border-radius:var(--rl);
+  padding:38px;backdrop-filter:blur(10px);text-align:center
+}
+.avail-badge{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 13px;
+  border-radius:50px;margin-bottom:16px;
+  background:rgba(var(--gr),.1);border:1px solid rgba(var(--gr),.24);
+  font-family:var(--fm);font-size:.66rem;color:var(--green);letter-spacing:.08em
+}
+.avail-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.avail-t{font-family:var(--fd);font-size:1.25rem;font-weight:800;color:var(--t1);margin-bottom:9px;overflow:visible}
+.avail-p{font-size:.87rem;color:var(--t2);line-height:1.78;margin-bottom:22px}
+.avail-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:22px}
+.avail-tag{
+  padding:4px 11px;background:rgba(var(--ar),.08);
+  border:1px solid rgba(var(--ar),.17);border-radius:50px;
+  font-size:.68rem;color:var(--accent);font-family:var(--fm)
 }
 
-/* Header */
-
-header {
-    padding: 60px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #161b22, #0d1117);
-    animation: fadeDown 1s ease;
-    transition: 0.3s;
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════ */
+footer{background:var(--bg2);border-top:1px solid var(--bo);padding:24px}
+.footer-in{
+  max-width:1120px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between
 }
+.f-logo{font-family:var(--fd);font-size:.82rem;font-weight:800;color:var(--t2)}
+.f-logo em{color:var(--accent);font-style:normal}
+.f-copy{font-size:.71rem;color:var(--t3);font-family:var(--fm)}
+.f-links{display:flex;gap:18px}
+.f-links a{font-size:.7rem;color:var(--t3);font-family:var(--fm);transition:color var(--tr);text-decoration:none}
+.f-links a:hover{color:var(--accent)}
 
-/* FIX FOR LIGHT MODE */
-.light-mode header {
-    background: linear-gradient(135deg, #ffffff, #eaeaea);
+/* ═══════════════════════════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════════════════════════ */
+.btt{
+  position:fixed;bottom:26px;right:26px;z-index:999;
+  width:40px;height:40px;background:var(--accent);color:#fff;
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:1rem;opacity:0;pointer-events:none;
+  transition:all var(--tr);box-shadow:0 4px 16px rgba(var(--ar),.34);
+  text-decoration:none
 }
+.btt.on{opacity:1;pointer-events:all}
+.btt:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(var(--ar),.52)}
 
-
-header img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 4px solid var(--accent);
-    margin-bottom: 15px;
-    transition: 0.3s;
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media(max-width:768px){
+  .nav-links{
+    position:fixed;top:66px;left:0;right:0;bottom:0;
+    background:var(--nbg);backdrop-filter:blur(22px);
+    flex-direction:column;justify-content:center;gap:28px;
+    transform:translateX(100%);transition:transform var(--tr)
+  }
+  .nav-links.open{transform:translateX(0)}
+  .nav-links a{font-size:1.05rem}
+  .ham{display:flex}
+  .nav-logo{font-size:.75rem}
+  .about-g{grid-template-columns:1fr;gap:34px}
+  .photo-wrap{max-width:240px;margin:0 auto}
+  .edu-card{grid-template-columns:1fr;gap:18px}
+  .exp-grid{grid-template-columns:1fr}
+  .feat-card{grid-template-columns:1fr}
+  .feat-card.rev{direction:ltr}
+  .feat-body{padding:24px 20px}
+  .carousel,.car-ph{min-height:220px}
+  .car-slide{min-height:220px}
+  .acad-grid{grid-template-columns:1fr}
+  .more-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .int-grid{grid-template-columns:1fr}
+  .contact-g{grid-template-columns:1fr}
+  .footer-in{flex-direction:column;gap:12px;text-align:center}
+  .f-links{justify-content:center}
 }
-
-header img:hover {
-    transform: scale(1.05);
+@media(min-width:769px)and(max-width:1024px){
+  .acad-grid{grid-template-columns:repeat(2,1fr)}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .int-grid{grid-template-columns:repeat(3,1fr)}
+  .about-g{gap:44px}
 }
-
-header h1 {
-    margin: 10px 0;
-    font-size: 40px;
-    color: var(--text);
-}
-
-header p {
-    color: var(--text);
-    opacity: 0.7;
-}
-
-/* Sections */
-
-section {
-    max-width: 1000px;
-    margin: auto;
-    padding: 40px 20px;
-    animation: fadeUp 1s ease;
-}
-
-h2 {
-    color: var(--accent);
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
-}
-
-.card {
-    background: var(--card);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #30363d;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-}
-
-/* Footer */
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background: var(--card);
-    color: #8b949e;
-}
-
-a {
-    color: var(--accent);
-}
-
-/* Animations */
-
-@keyframes fadeDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 </style>
 </head>
-
 <body>
 
-<button class="toggle-btn" onclick="toggleMode()">🌙 / ☀️</button>
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a href="#home" class="nav-logo">Muhammad Shoaib <em>Anwar</em></a>
+  <div class="nav-r">
+    <ul class="nav-links" id="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="theme-btn" id="theme-btn" title="Toggle theme">
+      <span id="theme-ic">☀️</span>
+    </button>
+    <button class="ham" id="ham" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-<header>
+<!-- ═══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <canvas id="osc"></canvas>
+  <div class="hero-ga"></div>
+  <div class="hero-gb"></div>
+  <div class="hero-wrap ctr">
+    <div class="hero-badge">
+      <div class="hbdot"></div>
+      B.E. Electrical Engineering &nbsp;·&nbsp; NUST
+    </div>
+    <h1 class="hero-name">
+      <span class="n1">Muhammad Shoaib</span>
+      <span class="n2">Anwar</span>
+    </h1>
+    <div class="hero-tw">
+      <span class="tw-pre">&gt;_</span>
+      <div class="tw-out"><span id="tw"></span><span class="tw-cur"></span></div>
+    </div>
+    <p class="hero-desc">
+      I design, build, and validate electrical systems — from embedded firmware and analog circuits to industrial automation and power electronics. I want to work where engineering scale and precision both matter.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="bta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        View My Work
+      </a>
+      <a href="#contact" class="btb">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Get In Touch
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>scroll</span>
+    <div class="hsl"></div>
+  </div>
+</section>
 
-<img src="profile.jpg" alt="Profile Picture">
+<!-- ═══════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════ -->
+<section class="sec about" id="about">
+  <div class="ctr">
+    <div class="about-g">
+      <div class="photo-wrap rv">
+        <div class="photo-glow"></div>
+        <div class="photo-outer">
+          <!--
+          ╔══════════════════════════════════════════════════════════╗
+          ║  PROFILE PHOTO — ADD YOUR PHOTO HERE                    ║
+          ║                                                          ║
+          ║  Steps:                                                  ║
+          ║  1. Save photo as "profile.jpg" in same folder          ║
+          ║  2. Delete the <div class="photo-ph">...</div> below    ║
+          ║  3. Paste this instead:                                  ║
+          ║                                                          ║
+          ║     <img src="profile.jpg"                               ║
+          ║          alt="Muhammad Shoaib Anwar"                     ║
+          ║          style="width:100%;height:100%;                  ║
+          ║                 object-fit:cover;                        ║
+          ║                 object-position:center top">             ║
+          ╚══════════════════════════════════════════════════════════╝
+          -->
+          <div class="photo-ph">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="5"/><path d="M2 20c0-4 4-7 10-7s10 3 10 7"/></svg>
+            <p>Add your photo here<br><code style="font-size:.58rem;opacity:.45">profile.jpg</code></p>
+          </div>
+        </div>
+        <div class="photo-badge">⚡</div>
+      </div>
 
-<h1>Muhammad Shoaib Anwar</h1>
+      <div class="rv d1">
+        <span class="stag">About Me</span>
+        <h2 class="sh2">Building Systems That <span>Actually Work</span></h2>
+        <div class="about-desc">
+          <p>Electrical Engineering at NUST isn't just coursework for me — it's a proving ground. In five semesters I've built a functioning door-lock system from scratch, soldered a precision peak detector on Vero board, derived a wireless power tile analytically from Biot-Savart, and programmed dual motor control patterns with custom PWM logic. Each project starts with a real engineering problem and ends with a measurement that either passes or fails.</p>
+          <br>
+          <p>My career direction sits squarely at the intersection of <strong>industrial electrical systems</strong> and <strong>embedded control</strong>. Whether it's a fertilizer plant's process instrumentation, a production line's PLC ladder logic, or the firmware inside a field device — I want to understand how it works and keep it running. I'm drawn to operations and maintenance roles at companies running at serious scale: Engro, Fauji Fertilizer, Fatima Group, Siemens, Nestle, Packages, CCI.</p>
+        </div>
+        <div class="stats rv d2">
+          <div class="stat"><span class="stat-n" data-t="14" data-s="+">0</span><span class="stat-l">Projects Built</span></div>
+          <div class="stat"><span class="stat-n" data-t="2" data-s=" yrs">0</span><span class="stat-l">Work Exp.</span></div>
+          <div class="stat"><span class="stat-n" data-t="3" data-s="">0</span><span class="stat-l">Leadership Roles</span></div>
+        </div>
+        <div class="rv d3">
+          <a href="#contact" class="bta">Let's Connect &nbsp;→</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<p>
-Electrical Engineering Student | Digital Systems | Power & Automation | Engineering Projects
-</p>
+<div class="divd"></div>
 
-</header>
+<!-- ═══════════════════════════════════════════
+     EDUCATION
+════════════════════════════════════════════ -->
+<section class="sec" id="education">
+  <div class="ctr">
+    <span class="stag rv">Education</span>
+    <h2 class="sh2 rv d1">Academic <span>Foundation</span></h2>
+    <div class="edu-card rv d2">
+      <div class="edu-ic">🎓</div>
+      <div>
+        <div class="edu-deg">Bachelor of Engineering — Electrical Engineering</div>
+        <div class="edu-uni">Pakistan Navy Engineering College (PNEC), National University of Sciences and Technology (NUST)</div>
+        <div class="edu-dt">2024 – 2028 &nbsp;·&nbsp; Batch 2024 &nbsp;·&nbsp; 5th Semester &nbsp;·&nbsp; Department of Electrical Engineering &nbsp;·&nbsp; Karachi</div>
+        <div class="edu-tags">
+          <span class="edu-tag">Digital Logic Design</span>
+          <span class="edu-tag">Microprocessor Systems</span>
+          <span class="edu-tag">Electronic Devices &amp; Circuits</span>
+          <span class="edu-tag">Electromagnetic Field Theory</span>
+          <span class="edu-tag">Network Analysis</span>
+          <span class="edu-tag">Electronic Circuit Design</span>
+          <span class="edu-tag">Computer Programming (C/C++)</span>
+          <span class="edu-tag">Linear Algebra &amp; Calculus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section>
+<div class="divd"></div>
 
-<h2>About Me</h2>
+<!-- ═══════════════════════════════════════════
+     EXPERIENCE
+════════════════════════════════════════════ -->
+<section class="sec exp" id="experience">
+  <div class="ctr">
+    <span class="stag rv">Background</span>
+    <h2 class="sh2 rv d1">Experience &amp; <span>Leadership</span></h2>
+    <div class="exp-grid">
+      <div class="rv">
+        <h3 class="exp-col-h"><span class="exp-cic">💼</span> Professional</h3>
+        <div class="tl">
+          <div class="tl-it">
+            <div class="tl-dot"></div>
+            <span class="tl-date">NOV 2022 — JUN 2024</span>
+            <div class="tl-role">Sales Team Leader</div>
+            <div class="tl-org">Rapid Estimating LLC</div>
+            <ul class="tl-ul">
+              <li>Managed 1,000+ outbound leads per day across email and social media — converting high-volume outreach into 2–3 signed clients weekly through structured follow-up workflows and tailored sample delivery</li>
+              <li>Handled 100+ simultaneous accounts across Residential and Commercial CSI trades, coordinating with estimators to build cost-accurate proposals that matched client specifications precisely</li>
+              <li>Built an end-to-end client records system in Microsoft Office — tracking quotations, communication history, and follow-up schedules across a high-volume professional pipeline</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-<p>
-I am an Electrical Engineering student passionate about understanding how systems work at both hardware and logical levels. 
-My interests include digital logic, automation, and engineering problem-solving. I enjoy working on technical projects, 
-documenting my work, and collaborating in team environments while continuously improving my engineering skills.
-</p>
+      <div class="rv d1">
+        <h3 class="exp-col-h"><span class="exp-cic">🏛️</span> Community &amp; Leadership</h3>
+        <div class="tl">
+          <div class="tl-it">
+            <div class="tl-dot"></div>
+            <span class="tl-date">NUST PNEC</span>
+            <div class="tl-role">Team Leader</div>
+            <div class="tl-org">NUST PNEC MUNIP</div>
+            <ul class="tl-ul">
+              <li>Led participant registration and onboarding for the full event — resolved real-time logistics issues to maintain uninterrupted session flow under live conditions</li>
+            </ul>
+          </div>
+          <div class="tl-it">
+            <div class="tl-dot"></div>
+            <span class="tl-date">NUST PNEC</span>
+            <div class="tl-role">Organizing Committee Member</div>
+            <div class="tl-org">NUST PNEC Olympiad</div>
+            <ul class="tl-ul">
+              <li>Owned registration data management using Google Forms and Excel — ensured accuracy and completeness across all participant records throughout the event lifecycle</li>
+            </ul>
+          </div>
+          <div class="tl-it">
+            <div class="tl-dot"></div>
+            <span class="tl-date">GOVERNMENT OF PAKISTAN</span>
+            <div class="tl-role">Volunteer</div>
+            <div class="tl-org">Polio Immunization Program (EPI)</div>
+            <ul class="tl-ul">
+              <li>Supported national field operations across outreach, public awareness campaigns, and structured data collection for the polio immunization program</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>Projects</h2>
+<div class="divd"></div>
 
-<div class="grid">
+<!-- ═══════════════════════════════════════════
+     FEATURED PROJECTS
+════════════════════════════════════════════ -->
+<section class="sec" id="projects">
+  <div class="ctr">
+    <span class="stag rv">Engineering Work</span>
+    <h2 class="sh2 rv d1">Flagship <span>Projects</span></h2>
+    <p class="sp rv d2">End-to-end hardware projects — defined, designed, simulated, built, and verified. Not just theory on paper.</p>
 
-<div class="card">
-<h3>Digital Logic Design Projects</h3>
-<p>
-Designed counters, flip-flops, and sequential circuits using NI Multisim, including multi-cycle digital event counter systems.
-</p>
-</div>
+    <div class="feat-list">
 
-<div class="card">
-<h3>Control System Simulation (C++)</h3>
-<p>
-Developed simulation-based projects such as automated water tank control logic and system behavior modeling using C++.
-</p>
-</div>
+      <!-- PROJECT 1: Smart Home Security System -->
+      <div class="feat-card rv">
+        <div class="carousel" id="car1">
+          <div class="car-track">
+            <!--
+            ╔══════════════════════════════════════════════════════════╗
+            ║  PROJECT 1 IMAGES — Smart Home Security System          ║
+            ║                                                          ║
+            ║  Replace each <div class="car-slide car-ph"> with:      ║
+            ║    <div class="car-slide">                               ║
+            ║      <img src="YOUR-FILE.jpg" alt="Description">        ║
+            ║    </div>                                                ║
+            ║                                                          ║
+            ║  Suggested photos:                                       ║
+            ║    • Assembled breadboard with Arduino + keypad         ║
+            ║    • LCD screen showing ACCESS GRANTED or DENIED        ║
+            ║    • Tinkercad simulation screenshot                     ║
+            ║    • Cardboard house demo model                         ║
+            ╚══════════════════════════════════════════════════════════╝
+            -->
+            <div class="car-slide car-ph"><span class="car-ph-ic">🔐</span><span class="car-ph-tx">Image 1<br>Breadboard assembly</span></div>
+            <div class="car-slide car-ph"><span class="car-ph-ic">📷</span><span class="car-ph-tx">Image 2<br>LCD display / demo</span></div>
+            <div class="car-slide car-ph"><span class="car-ph-ic">📷</span><span class="car-ph-tx">Image 3<br>Tinkercad simulation</span></div>
+          </div>
+          <button class="car-btn car-prev" onclick="carMove('car1',-1)">&#8249;</button>
+          <button class="car-btn car-next" onclick="carMove('car1', 1)">&#8250;</button>
+          <div class="car-dots" id="dots-car1"></div>
+        </div>
+        <div class="feat-body">
+          <span class="feat-num">Flagship Project 01 &nbsp;·&nbsp; Microprocessor Systems</span>
+          <h3 class="feat-title">Smart Home Security System — PIN-Protected Door Lock with Laser Latch</h3>
+          <p class="feat-desc">Most hobby lock projects stop at a buzzer. This one implements a complete three-state finite state machine on the ATmega328P — idle, entry, and lockout — with ascending PWM tones for access granted, descending for denied, and a 60-second hard lockout after three failed attempts. The laser diode is the latch mechanism. Fully modeled in Tinkercad before being assembled and physically stress-tested across 50+ consecutive entry cycles.</p>
+          <div class="feat-specs">
+            <div class="feat-spec"><span class="feat-sk">Platform</span><span class="feat-sv">Arduino Nano — ATmega328P @ 16 MHz</span></div>
+            <div class="feat-spec"><span class="feat-sk">Interface</span><span class="feat-sv">4×4 matrix keypad + 16×2 I2C LCD (PCF8574)</span></div>
+            <div class="feat-spec"><span class="feat-sk">Latch</span><span class="feat-sv">Laser diode — PWM-controlled, fail-secure on power-up</span></div>
+            <div class="feat-spec"><span class="feat-sk">Verified</span><span class="feat-sv">Tinkercad simulation + 50-cycle physical test (100% accuracy)</span></div>
+          </div>
+          <div class="feat-tags">
+            <span class="feat-tag">Arduino C++</span><span class="feat-tag">FSM Design</span>
+            <span class="feat-tag">I2C Protocol</span><span class="feat-tag">PWM Audio</span>
+            <span class="feat-tag">Tinkercad</span><span class="feat-tag">Embedded</span>
+          </div>
+        </div>
+      </div>
 
-<div class="card">
-<h3>Automation & Relay Control System</h3>
-<p>
-Implemented relay-based AC appliance control using ESP32 and switching logic for basic automation applications.
-</p>
-</div>
+      <!-- PROJECT 2: Active Peak Detector -->
+      <div class="feat-card rev rv d1">
+        <div class="feat-body">
+          <span class="feat-num">Flagship Project 02 &nbsp;·&nbsp; Electronic Circuit Design</span>
+          <h3 class="feat-title">High-Precision Active Peak Detector — Diode Error Reduced to Under 10 µV</h3>
+          <p class="feat-desc">A standard diode peak detector throws away ~700 mV to the forward drop — that's a measurement error before you even start. Enclosing the diode inside an op-amp feedback loop (TL082CD J-FET) reduces the effective error to under 10 µV. Measurement accuracy holds within 3% from DC through 10 kHz. Designed and validated in NI Multisim at 0.02% simulation error, then physically soldered onto Vero board and cross-checked against a calibrated bench DMM.</p>
+          <div class="feat-specs">
+            <div class="feat-spec"><span class="feat-sk">Op-Amp</span><span class="feat-sv">TL082CD Dual J-FET — ±12 V supply rail</span></div>
+            <div class="feat-spec"><span class="feat-sk">Accuracy</span><span class="feat-sv">&lt;3% error DC–10 kHz; 0.02% achieved in Multisim</span></div>
+            <div class="feat-spec"><span class="feat-sk">Readout</span><span class="feat-sv">Arduino ADC (10-bit, moving-average filtered) → 16×2 LCD</span></div>
+            <div class="feat-spec"><span class="feat-sk">Hardware</span><span class="feat-sv">Fully soldered Vero board — bench DMM validated</span></div>
+          </div>
+          <div class="feat-tags">
+            <span class="feat-tag">Analog Design</span><span class="feat-tag">Op-Amp</span>
+            <span class="feat-tag">NI Multisim</span><span class="feat-tag">Vero Board</span>
+            <span class="feat-tag">Signal Processing</span>
+          </div>
+        </div>
+        <div class="carousel" id="car2">
+          <div class="car-track">
+            <!--
+            ╔══════════════════════════════════════════════════════════╗
+            ║  PROJECT 2 IMAGES — Active Peak Detector                ║
+            ║                                                          ║
+            ║  Suggested photos:                                       ║
+            ║    • Soldered Vero board — assembled circuit            ║
+            ║    • NI Multisim schematic screenshot                   ║
+            ║    • Multisim waveform / simulation output              ║
+            ║    • Bench DMM reading on hardware                      ║
+            ╚══════════════════════════════════════════════════════════╝
+            -->
+            <div class="car-slide car-ph"><span class="car-ph-ic">📡</span><span class="car-ph-tx">Image 1<br>Vero board build</span></div>
+            <div class="car-slide car-ph"><span class="car-ph-ic">📷</span><span class="car-ph-tx">Image 2<br>Multisim schematic</span></div>
+            <div class="car-slide car-ph"><span class="car-ph-ic">📷</span><span class="car-ph-tx">Image 3<br>DMM measurement</span></div>
+          </div>
+          <button class="car-btn car-prev" onclick="carMove('car2',-1)">&#8249;</button>
+          <button class="car-btn car-next" onclick="carMove('car2', 1)">&#8250;</button>
+          <div class="car-dots" id="dots-car2"></div>
+        </div>
+      </div>
 
-</div>
+      <!-- PROJECT 3: Wireless Charging Tile -->
+      <div class="feat-card rv d2">
+        <div class="carousel" id="car3">
+          <div class="car-track">
+            <!--
+            ╔══════════════════════════════════════════════════════════╗
+            ║  PROJECT 3 IMAGES — Wireless Charging Tile              ║
+            ║                                                          ║
+            ║  Suggested photos:                                       ║
+            ║    • Python graph: current vs distance                  ║
+            ║    • Python graph: EMF vs distance                      ║
+            ║    • Python graph: mutual inductance vs distance        ║
+            ║    • Coil geometry diagram from your report             ║
+            ╚══════════════════════════════════════════════════════════╝
+            -->
+            <div class="car-slide car-ph"><span class="car-ph-ic">🔋</span><span class="car-ph-tx">Image 1<br>Python simulation graph</span></div>
+            <div class="car-slide car-ph"><span class="car-ph-ic">📷</span><span class="car-ph-tx">Image 2<br>Coil geometry / design</span></div>
+            <div class="car-slide car-ph"><span class="car-ph-ic">📷</span><span class="car-ph-tx">Image 3<br>Analysis results</span></div>
+          </div>
+          <button class="car-btn car-prev" onclick="carMove('car3',-1)">&#8249;</button>
+          <button class="car-btn car-next" onclick="carMove('car3', 1)">&#8250;</button>
+          <div class="car-dots" id="dots-car3"></div>
+        </div>
+        <div class="feat-body">
+          <span class="feat-num">Flagship Project 03 &nbsp;·&nbsp; Electromagnetic Field Theory</span>
+          <h3 class="feat-title">Wireless Charging Tile for Smart City — First-Principles Electromagnetic Design</h3>
+          <p class="feat-desc">No simulation package was used for the core design — this coil was derived analytically from the ground up using Biot-Savart Law and Faraday's Law (Ulaby 7th Ed.). The derivation establishes that exactly 32 transmitter turns deliver ≥5 A to a receiver coil at 5 cm separation, operating at 100 kHz on a flat Qi-compatible spiral. A custom Python model (NumPy + Matplotlib) then generated three parameter-sweep graphs that independently confirmed the analytical result.</p>
+          <div class="feat-specs">
+            <div class="feat-spec"><span class="feat-sk">Coil</span><span class="feat-sv">32-turn flat spiral, 8 cm radius, litz wire, 100 kHz</span></div>
+            <div class="feat-spec"><span class="feat-sk">Output</span><span class="feat-sv">5.04 A delivered at 5 cm — meets Qi specification</span></div>
+            <div class="feat-spec"><span class="feat-sk">Theory</span><span class="feat-sv">Biot-Savart + Faraday's Law — derived analytically</span></div>
+            <div class="feat-spec"><span class="feat-sk">Validated</span><span class="feat-sv">Python model (NumPy, Matplotlib) — 3 parameter sweeps</span></div>
+          </div>
+          <div class="feat-tags">
+            <span class="feat-tag">Electromagnetics</span><span class="feat-tag">Python</span>
+            <span class="feat-tag">Biot-Savart Law</span><span class="feat-tag">WPT / Qi</span>
+            <span class="feat-tag">NumPy</span><span class="feat-tag">Matplotlib</span>
+          </div>
+        </div>
+      </div>
 
-<h2>Skills</h2>
+    </div>
+  </div>
+</section>
 
-<div class="grid">
+<div class="divd"></div>
 
-<div class="card">
-<ul>
-<li>Digital Logic Design</li>
-<li>C++ Programming (Simulation & Logic)</li>
-<li>Circuit Design & Simulation (NI Multisim)</li>
-<li>Technical Documentation</li>
-</ul>
-</div>
+<!-- ═══════════════════════════════════════════
+     ACADEMIC PROJECTS
+════════════════════════════════════════════ -->
+<section class="sec acad" id="academic">
+  <div class="ctr">
+    <span class="stag rv">Course Work</span>
+    <h2 class="sh2 rv d1">Engineering <span>Project Portfolio</span></h2>
+    <p class="sp rv d2">Semester projects across power systems, digital logic, embedded C++, analog electronics, and IoT.</p>
 
-<div class="card">
-<ul>
-<li>Microsoft Word, Excel, PowerPoint</li>
-<li>Analytical Thinking & Problem Solving</li>
-<li>Team Collaboration</li>
-<li>Engineering Project Work</li>
-</ul>
-</div>
+    <div class="acad-grid">
 
-</div>
+      <!-- APFC -->
+      <div class="ac rv">
+        <div class="ac-img">
+          <!-- IMAGE: apfc.jpg — Multisim simulation screenshot or capacitor bank schematic -->
+          <div class="ac-ph"><span class="ac-ph-ic">⚡</span><span class="ac-ph-tx">apfc.jpg</span></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-top">
+            <div class="ac-ic">⚡</div>
+            <span class="ac-code">EE-211<br>Network Analysis</span>
+          </div>
+          <h3 class="ac-title">Automatic Power Factor Correction Unit (APFC)</h3>
+          <p class="ac-desc">Full home load survey (fans, AC, refrigerator, freezer, router) followed by a fixed + dynamic capacitor bank design that lifts power factor from ~0.70 to 0.97+. Includes reactive power calculations, component sizing table, and NI Multisim circuit simulation.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">NI Multisim</span><span class="ac-tag">Power Systems</span><span class="ac-tag">Capacitor Bank</span>
+          </div>
+        </div>
+      </div>
 
-<h2>Contact</h2>
+      <!-- DC Motor -->
+      <div class="ac rv d1">
+        <div class="ac-img">
+          <!-- IMAGE: motor-control.jpg — breadboard photo or serial monitor screenshot -->
+          <div class="ac-ph"><span class="ac-ph-ic">🔄</span><span class="ac-ph-tx">motor-control.jpg</span></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-top">
+            <div class="ac-ic">🔄</div>
+            <span class="ac-code">EE-222<br>Microprocessor Systems</span>
+          </div>
+          <h3 class="ac-title">Microcontroller-Based DC Motor Control — Dual PWM Patterns</h3>
+          <p class="ac-desc">Two distinct speed profiles on Arduino Uno + L298N: (1) a smooth 90-second ramp-up followed by ramp-down, and (2) discrete stepped doublings at 30-second intervals. Serial monitor timing logs validate execution against specification.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">Arduino Uno</span><span class="ac-tag">PWM</span><span class="ac-tag">L298N</span><span class="ac-tag">Motor Control</span>
+          </div>
+        </div>
+      </div>
 
-<p>
+      <!-- Restaurant OOP -->
+      <div class="ac rv d2">
+        <div class="ac-img">
+          <!-- IMAGE: restaurant-oop.jpg — console output screenshot showing billing -->
+          <div class="ac-ph"><span class="ac-ph-ic">💻</span><span class="ac-ph-tx">restaurant-oop.jpg</span></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-top">
+            <div class="ac-ic">💻</div>
+            <span class="ac-code">CS-107<br>Computer Programming</span>
+          </div>
+          <h3 class="ac-title">Restaurant Ordering System — Complete OOP in C++</h3>
+          <p class="ac-desc">"Byte &amp; Bite Bistro" — console-based billing system that demonstrates all four OOP pillars: encapsulation, inheritance, polymorphism, and operator overloading. Handles dine-in (10% service charge) and takeaway with dynamic multi-order merging and final receipt generation.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">C++</span><span class="ac-tag">OOP</span><span class="ac-tag">Polymorphism</span><span class="ac-tag">Inheritance</span>
+          </div>
+        </div>
+      </div>
 
-📧 Email:
-<a href="mailto:ranamuhammadshoaib194@gmail.com">
-ranamuhammadshoaib194@gmail.com
-</a>
+      <!-- 2-Digit Counter -->
+      <div class="ac rv">
+        <div class="ac-img">
+          <!-- IMAGE: counter.jpg — hardware 7-segment display photo or Multisim screenshot -->
+          <div class="ac-ph"><span class="ac-ph-ic">🔢</span><span class="ac-ph-tx">counter.jpg</span></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-top">
+            <div class="ac-ic">🔢</div>
+            <span class="ac-code">EE-221<br>Digital Logic Design</span>
+          </div>
+          <h3 class="ac-title">2-Digit Digital Counter (00–99) — Simulated and Hardware Built</h3>
+          <p class="ac-desc">Cascaded two 7490 BCD counters with 7447 decoder ICs driving dual 7-segment displays. Increments 00→99 on push-button clock pulses with automatic reset. Designed in NI Multisim, then fully assembled and tested on real hardware.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">NI Multisim</span><span class="ac-tag">7490 Counter</span><span class="ac-tag">7447 Decoder</span><span class="ac-tag">Hardware</span>
+          </div>
+        </div>
+      </div>
 
-<br><br>
+      <!-- Event Counter -->
+      <div class="ac rv d1">
+        <div class="ac-img">
+          <!-- IMAGE: event-counter.jpg — Multisim simulation with outputs shown -->
+          <div class="ac-ph"><span class="ac-ph-ic">🔀</span><span class="ac-ph-tx">event-counter.jpg</span></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-top">
+            <div class="ac-ic">🔀</div>
+            <span class="ac-code">EE-221<br>Digital Logic Design</span>
+          </div>
+          <h3 class="ac-title">Event Counter with Cycle-Dependent Output Control</h3>
+          <p class="ac-desc">0–30 counter that toggles LED, buzzer, and relay at specific event counts using JK flip-flops to track cycle state. Outputs activate in Cycle 1 and deactivate in Cycle 2 — a clean demonstration of stateful sequential logic with real switching outputs.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">NI Multisim</span><span class="ac-tag">7493</span><span class="ac-tag">JK Flip-Flop</span><span class="ac-tag">Sequential Logic</span>
+          </div>
+        </div>
+      </div>
 
-🔗 GitHub:
-<a href="https://github.com/muhammadshoaibanwar-ee" target="_blank">
-github.com/muhammadshoaibanwar-ee
-</a>
+      <!-- 5V Charger -->
+      <div class="ac rv d2">
+        <div class="ac-img">
+          <!-- IMAGE: charger.jpg — breadboard photo with DMM reading showing 5V output -->
+          <div class="ac-ph"><span class="ac-ph-ic">🔌</span><span class="ac-ph-tx">charger.jpg</span></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-top">
+            <div class="ac-ic">🔌</div>
+            <span class="ac-code">EE-215<br>Electronic Devices</span>
+          </div>
+          <h3 class="ac-title">AC to DC 5 V Regulated Power Supply — Breadboard Build</h3>
+          <p class="ac-desc">Complete AC-DC conversion chain assembled on breadboard: full-wave bridge rectifier (4× 1N4007 diodes), 1000 µF electrolytic smoothing capacitor, and 7805 linear regulator delivering stable 5 V DC. Output verified with a calibrated Digital Multimeter.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">Breadboard</span><span class="ac-tag">7805 Regulator</span><span class="ac-tag">Bridge Rectifier</span><span class="ac-tag">DMM Verified</span>
+          </div>
+        </div>
+      </div>
 
-<br><br>
+      <!-- ESP32 IoT -->
+      <div class="ac rv">
+        <div class="ac-img">
+          <!-- IMAGE: esp32-relay.jpg — browser/phone showing web server UI, or wiring photo -->
+          <div class="ac-ph"><span class="ac-ph-ic">📶</span><span class="ac-ph-tx">esp32-relay.jpg</span></div>
+        </div>
+        <div class="ac-body">
+          <div class="ac-top">
+            <div class="ac-ic">📶</div>
+            <span class="ac-code">EE Lab<br>Circuit Analysis</span>
+          </div>
+          <h3 class="ac-title">ESP32 Relay Web Server — Remote AC Appliance Control via Browser</h3>
+          <p class="ac-desc">Configured an ESP32 with a multi-channel relay module to switch AC household appliances remotely through a self-hosted web interface reachable from any browser on the network. Practical IoT integration with real AC switching loads.</p>
+          <div class="ac-tags">
+            <span class="ac-tag">ESP32</span><span class="ac-tag">IoT</span><span class="ac-tag">Web Server</span><span class="ac-tag">Relay</span><span class="ac-tag">AC Control</span>
+          </div>
+        </div>
+      </div>
 
-💼 LinkedIn:
-<a href="https://www.linkedin.com/in/muhammad-shoaib-ee" target="_blank">
-linkedin.com/in/muhammad-shoaib-ee
-</a>
+    </div><!-- end acad-grid -->
 
-</p>
+    <!-- Additional Projects -->
+    <div class="more-box rv">
+      <h4 class="more-h">Additional Projects</h4>
+      <ul class="more-grid">
+        <li>
+          <div class="more-info">Square Wave Generator using NE555 Timer (Astable Mode)
+            <span class="more-tool">Proteus &nbsp;·&nbsp; Vero Board &nbsp;·&nbsp; EE-313</span>
+          </div>
+        </li>
+        <li>
+          <div class="more-info">Polynomial Calculator — Add, Subtract, Multiply, Evaluate
+            <span class="more-tool">Python &nbsp;·&nbsp; OOP Design &nbsp;·&nbsp; CS-117</span>
+          </div>
+        </li>
+        <li>
+          <div class="more-info">LED Fault Indicator for Overvoltage Protection (DC Supply)
+            <span class="more-tool">Simulink &nbsp;·&nbsp; Multi-threshold Logic &nbsp;·&nbsp; EE Lab</span>
+          </div>
+        </li>
+        <li>
+          <div class="more-info">Electromagnetic Field Analysis of Inductors — FEM Simulation
+            <span class="more-tool">QuickField &nbsp;·&nbsp; Mutual Inductance &nbsp;·&nbsp; EE-241</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
 
+<div class="divd"></div>
+
+<!-- ═══════════════════════════════════════════
+     SKILLS
+════════════════════════════════════════════ -->
+<section class="sec" id="skills">
+  <div class="ctr">
+    <span class="stag rv">Capabilities</span>
+    <h2 class="sh2 rv d1">Skills &amp; <span>Expertise</span></h2>
+    <p class="sp rv d2">Technical toolkit built through hands-on project work, coursework, and two years of professional experience.</p>
+    <div class="skills-grid">
+      <div class="sk rv">
+        <div class="sk-ic">⚙️</div>
+        <h3 class="sk-title">Electrical &amp; Systems</h3>
+        <div class="tags">
+          <span class="tag hl">Digital Systems &amp; Control Logic</span>
+          <span class="tag hl">Embedded Systems &amp; Firmware</span>
+          <span class="tag">Industrial Automation (PLC/SCADA)</span>
+          <span class="tag">Analog Circuit Design</span>
+          <span class="tag">Power Electronics</span>
+          <span class="tag">Signal Processing</span>
+          <span class="tag">Electromagnetics (FEM)</span>
+          <span class="tag">PCB &amp; Breadboard Prototyping</span>
+          <span class="tag">IoT Integration</span>
+          <span class="tag">Instrumentation &amp; Measurement</span>
+        </div>
+      </div>
+      <div class="sk rv d1">
+        <div class="sk-ic">🖥️</div>
+        <h3 class="sk-title">Software &amp; Tools</h3>
+        <div class="tags">
+          <span class="tag hl">NI Multisim</span>
+          <span class="tag hl">Tinkercad Circuits</span>
+          <span class="tag">Proteus Design Suite</span>
+          <span class="tag">QuickField (FEM)</span>
+          <span class="tag">Arduino IDE</span>
+          <span class="tag">C / C++ Programming</span>
+          <span class="tag">Python (NumPy, Matplotlib)</span>
+          <span class="tag">Microsoft Excel</span>
+          <span class="tag">MS Office Suite</span>
+          <span class="tag">Google Workspace</span>
+        </div>
+      </div>
+      <div class="sk rv d2">
+        <div class="sk-ic">🤝</div>
+        <h3 class="sk-title">Professional</h3>
+        <div class="tags">
+          <span class="tag hl">Technical Communication</span>
+          <span class="tag hl">Team Leadership</span>
+          <span class="tag">Client &amp; Stakeholder Relations</span>
+          <span class="tag">Project Organization</span>
+          <span class="tag">Data Tracking &amp; Reporting</span>
+          <span class="tag">Technical Documentation</span>
+          <span class="tag">Cross-functional Coordination</span>
+          <span class="tag">Problem Solving Under Pressure</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divd"></div>
+
+<!-- ═══════════════════════════════════════════
+     INTERESTS
+════════════════════════════════════════════ -->
+<section class="sec" style="background:var(--bg2)" id="interests">
+  <div class="ctr">
+    <span class="stag rv">What Drives Me</span>
+    <h2 class="sh2 rv d1">Interests &amp; <span>Career Direction</span></h2>
+    <div class="int-grid">
+      <div class="int-c rv">
+        <span class="int-ic">🏭</span>
+        <div class="int-n">Industrial Automation &amp; Plant Engineering</div>
+        <p class="int-p">Process industries — fertilizer, food &amp; beverage, chemicals, FMCG — run on electrical systems where downtime costs millions. I'm drawn to maintenance engineering, PLC/SCADA commissioning, instrumentation, and keeping large-scale production lines running. Target employers: Engro, Fauji Fertilizer, Fatima Group, Siemens, Nestle, Packages, CCI.</p>
+      </div>
+      <div class="int-c rv d1">
+        <span class="int-ic">🔌</span>
+        <div class="int-n">Embedded Control &amp; Hardware Systems</div>
+        <p class="int-p">The hardware side of intelligence — microcontrollers, real-time firmware, sensor interfacing, and the feedback loops that make machines respond to the physical world. Whether it's a field device, an industrial sensor node, or a custom control board, I want to understand it from the silicon up.</p>
+      </div>
+      <div class="int-c rv d2">
+        <span class="int-ic">🌍</span>
+        <div class="int-n">Documentaries &amp; Global Engineering</div>
+        <p class="int-p">Fascinated by infrastructure at civilizational scale — power grids, manufacturing chains, logistics networks. Documentaries and travel develop the systems-level thinking that real engineering problems demand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divd"></div>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════ -->
+<section class="sec" id="contact">
+  <div class="ctr">
+    <span class="stag rv">Get In Touch</span>
+    <h2 class="sh2 rv d1">Let's <span>Connect</span></h2>
+    <div class="contact-g">
+      <div>
+        <p class="sp rv d1" style="margin-bottom:0">I'm actively seeking internship opportunities in electrical engineering — industrial automation, plant maintenance, control systems, or embedded electronics. If your team works on problems worth solving, I'd like to hear from you.</p>
+        <div class="clinks rv d2">
+          <a href="mailto:ranamuhammadshoaib194@gmail.com" class="clink">
+            <div class="clink-ic">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <span class="clink-lbl">EMAIL</span>
+              <span class="clink-v">ranamuhammadshoaib194@gmail.com</span>
+            </div>
+            <span class="clink-arr">→</span>
+          </a>
+          <a href="https://github.com/muhammadshoaibanwar-ee" target="_blank" rel="noopener" class="clink">
+            <div class="clink-ic">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <div>
+              <span class="clink-lbl">GITHUB</span>
+              <span class="clink-v">github.com/muhammadshoaibanwar-ee</span>
+            </div>
+            <span class="clink-arr">→</span>
+          </a>
+          <a href="https://linkedin.com/in/muhammad-shoaib-ee" target="_blank" rel="noopener" class="clink">
+            <div class="clink-ic">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <span class="clink-lbl">LINKEDIN</span>
+              <span class="clink-v">linkedin.com/in/muhammad-shoaib-ee</span>
+            </div>
+            <span class="clink-arr">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="avail-card rv d2">
+        <div class="avail-badge"><div class="avail-dot"></div>OPEN TO OPPORTUNITIES</div>
+        <h3 class="avail-t">Seeking Engineering Internship</h3>
+        <p class="avail-p">Available for internship roles across electrical and automation engineering. I bring hands-on hardware project experience and a proven two-year track record of professional execution to any engineering team.</p>
+        <div class="avail-tags">
+          <span class="avail-tag">Plant Maintenance</span>
+          <span class="avail-tag">Industrial Automation</span>
+          <span class="avail-tag">PLC / SCADA</span>
+          <span class="avail-tag">Embedded Systems</span>
+          <span class="avail-tag">Electrical Design</span>
+          <span class="avail-tag">Control Systems</span>
+        </div>
+        <a href="mailto:ranamuhammadshoaib194@gmail.com" class="bta" style="width:100%;justify-content:center">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send Me an Email
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-
-© 2026 Muhammad Shoaib Anwar
-
+  <div class="footer-in">
+    <span class="f-logo">Muhammad Shoaib <em>Anwar</em></span>
+    <span class="f-copy">© 2025 &nbsp;·&nbsp; B.E. Electrical Engineering &nbsp;·&nbsp; NUST</span>
+    <div class="f-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
 </footer>
 
-<script>
+<a href="#home" class="btt" id="btt">↑</a>
 
-function toggleMode()
-{
-    document.body.classList.toggle("light-mode");
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+/* ── OSCILLOSCOPE CANVAS ────────────────────────── */
+const osc = document.getElementById('osc');
+const ctx = osc.getContext('2d');
+let W, H, off = 0;
+
+function resizeOsc() {
+  W = osc.width  = window.innerWidth;
+  H = osc.height = window.innerHeight;
+}
+resizeOsc();
+window.addEventListener('resize', resizeOsc);
+
+function oscColors() {
+  const dark = document.documentElement.dataset.theme !== 'light';
+  return {
+    grid: dark ? 'rgba(124,172,140,0.055)' : 'rgba(89,98,53,0.055)',
+    sine: dark ? 'rgba(217,104,70,0.30)'   : 'rgba(217,104,70,0.22)',
+    sq:   dark ? 'rgba(124,172,140,0.18)'  : 'rgba(89,98,53,0.13)',
+    tri:  dark ? 'rgba(217,104,70,0.10)'   : 'rgba(217,104,70,0.07)'
+  };
 }
 
-</script>
+function drawOsc() {
+  ctx.clearRect(0, 0, W, H);
+  off += 0.52;
+  const col = oscColors();
+  const gs  = 54;
 
+  /* Grid */
+  ctx.lineWidth = 0.55;
+  for (let x = 0; x < W; x += gs) {
+    ctx.strokeStyle = col.grid;
+    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+  }
+  for (let y = 0; y < H; y += gs) {
+    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+  }
+
+  /* Sine wave */
+  ctx.beginPath();
+  for (let x = 0; x <= W; x += 2) {
+    const y = H * 0.62 + Math.sin((x * 0.014) + off * 0.017) * H * 0.115;
+    x === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle = col.sine; ctx.lineWidth = 1.8; ctx.stroke();
+
+  /* Square wave */
+  const sp = 128;
+  ctx.beginPath();
+  for (let x = 0; x <= W; x++) {
+    const ph = (x + off * 0.78) % sp;
+    const y  = H * 0.27 + (ph < sp/2 ? -1 : 1) * H * 0.062;
+    x === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle = col.sq; ctx.lineWidth = 1.2; ctx.stroke();
+
+  /* Triangle wave */
+  const tp = 176;
+  ctx.beginPath();
+  for (let x = 0; x <= W; x += 2) {
+    const ph   = (x + off * 0.58) % tp;
+    const norm = ph / tp;
+    const tv   = norm < 0.5 ? 4*norm - 1 : 3 - 4*norm;
+    const y    = H * 0.82 + tv * H * 0.055;
+    x === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle = col.tri; ctx.lineWidth = 1.0; ctx.stroke();
+
+  requestAnimationFrame(drawOsc);
+}
+drawOsc();
+
+/* ── TYPEWRITER ────────────────────────────────── */
+const phrases = [
+  'Electrical Engineer',
+  'Industrial Automation',
+  'PLC & SCADA Systems',
+  'Embedded Firmware',
+  'Circuit Design & Simulation',
+  'Plant Maintenance Engineering'
+];
+let pi = 0, ci = 0, del = false;
+const twEl = document.getElementById('tw');
+function type() {
+  const cur = phrases[pi];
+  if (!del) {
+    twEl.textContent = cur.slice(0, ++ci);
+    if (ci === cur.length) { del = true; setTimeout(type, 2200); return; }
+    setTimeout(type, 62);
+  } else {
+    twEl.textContent = cur.slice(0, --ci);
+    if (ci === 0) { del = false; pi = (pi+1) % phrases.length; setTimeout(type, 320); return; }
+    setTimeout(type, 34);
+  }
+}
+setTimeout(type, 1000);
+
+/* ── THEME TOGGLE ──────────────────────────────── */
+const themeBtn = document.getElementById('theme-btn');
+const themeIc  = document.getElementById('theme-ic');
+function applyTheme(t) {
+  document.documentElement.dataset.theme = t;
+  themeIc.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('msa-theme', t);
+}
+applyTheme(localStorage.getItem('msa-theme') || 'dark');
+themeBtn.addEventListener('click', () => {
+  applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+
+/* ── NAVBAR ────────────────────────────────────── */
+const navEl = document.getElementById('nav');
+const bttEl = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('sc', scrollY > 60);
+  bttEl.classList.toggle('on', scrollY > 460);
+});
+
+/* ── MOBILE NAV ────────────────────────────────── */
+function toggleNav() { document.getElementById('navlinks').classList.toggle('open'); }
+document.querySelectorAll('.nav-links a').forEach(a =>
+  a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'))
+);
+
+/* ── SCROLL REVEAL ─────────────────────────────── */
+const ro = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: .08, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+/* ── STAT COUNTERS ─────────────────────────────── */
+const co = new IntersectionObserver((entries, obs) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, tgt = +el.dataset.t, suf = el.dataset.s || '';
+    let n = 0;
+    const step = Math.ceil(tgt / 30);
+    const tmr = setInterval(() => {
+      n = Math.min(n + step, tgt);
+      el.textContent = n + suf;
+      if (n >= tgt) clearInterval(tmr);
+    }, 46);
+    obs.unobserve(el);
+  });
+}, { threshold: .5 });
+document.querySelectorAll('.stat-n[data-t]').forEach(el => co.observe(el));
+
+/* ── CAROUSEL ──────────────────────────────────── */
+const carState = {};
+
+function initCar(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const slides = el.querySelectorAll('.car-slide');
+  if (!slides.length) return;
+  carState[id] = { idx: 0, total: slides.length };
+  const dotsEl = document.getElementById('dots-' + id);
+  if (dotsEl) {
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'car-dot' + (i === 0 ? ' on' : '');
+      d.setAttribute('aria-label', 'Go to slide ' + (i+1));
+      d.onclick = () => carGo(id, i);
+      dotsEl.appendChild(d);
+    });
+  }
+  el.querySelectorAll('.car-btn').forEach(b => {
+    b.style.display = slides.length <= 1 ? 'none' : '';
+  });
+}
+
+function carMove(id, dir) {
+  const s = carState[id]; if (!s) return;
+  carGo(id, (s.idx + dir + s.total) % s.total);
+}
+
+function carGo(id, idx) {
+  const s = carState[id]; if (!s) return;
+  s.idx = idx;
+  const el    = document.getElementById(id);
+  const track = el.querySelector('.car-track');
+  track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+  el.querySelectorAll('.car-dot').forEach((d, i) => d.classList.toggle('on', i === idx));
+}
+
+['car1','car2','car3'].forEach(initCar);
+</script>
 </body>
 </html>
