@@ -568,6 +568,51 @@ footer { background:var(--bg2); border-top:1px solid var(--bo); padding:24px; }
 .f-links a:hover { color:var(--accent); }
 
 /* =====================================================
+   LIGHTBOX
+===================================================== */
+#lb {
+  position:fixed; inset:0; z-index:9999;
+  background:rgba(0,0,0,.92); backdrop-filter:blur(8px);
+  display:none; align-items:center; justify-content:center;
+  padding:20px; cursor:zoom-out;
+}
+#lb.open { display:flex; }
+#lb-img {
+  max-width:92vw; max-height:88vh;
+  object-fit:contain; border-radius:10px;
+  box-shadow:0 0 60px rgba(0,0,0,.8);
+  cursor:default; user-select:none;
+  transition:opacity .2s ease;
+}
+#lb-close {
+  position:fixed; top:20px; right:24px;
+  width:40px; height:40px; border-radius:50%;
+  background:rgba(217,104,70,.9); color:#fff;
+  border:none; font-size:1.1rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .2s ease; z-index:10000;
+}
+#lb-close:hover { background:var(--accent); transform:scale(1.1); }
+#lb-prev, #lb-next {
+  position:fixed; top:50%; transform:translateY(-50%);
+  width:46px; height:46px; border-radius:50%;
+  background:rgba(217,104,70,.85); color:#fff;
+  border:none; font-size:1.6rem; cursor:pointer;
+  display:none; align-items:center; justify-content:center;
+  transition:all .2s ease; z-index:10000; line-height:1;
+}
+#lb-prev { left:18px; }
+#lb-next { right:18px; }
+#lb-prev:hover, #lb-next:hover { background:var(--accent); transform:translateY(-50%) scale(1.1); }
+#lb-prev.vis, #lb-next.vis { display:flex; }
+#lb-cap {
+  position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+  font-family:var(--fm); font-size:.72rem; color:rgba(255,255,255,.55);
+  letter-spacing:.1em; text-transform:uppercase; white-space:nowrap;
+}
+/* Make all portfolio images show pointer cursor */
+.car-slide img, .ac-img img, .photo-outer img { cursor:zoom-in; }
+/* =====================================================
    BACK TO TOP
 ===================================================== */
 .btt {
@@ -1147,7 +1192,13 @@ footer { background:var(--bg2); border-top:1px solid var(--bo); padding:24px; }
     </div>
   </div>
 </footer>
-
+<div id="lb" onclick="lbClose()">
+  <button id="lb-close" onclick="lbClose()">✕</button>
+  <button id="lb-prev" onclick="lbNav(-1)">&#8249;</button>
+  <button id="lb-next" onclick="lbNav(1)">&#8250;</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-cap"></div>
+</div>
 <a href="#home" class="btt" id="btt">↑</a>
 
 <!-- JAVASCRIPT -->
@@ -1372,6 +1423,78 @@ function carGo(id, idx) {
 }
 ['car1','car2','car3'].forEach(initCar);
 
+/* ── LIGHTBOX ───────────────────────────────────── */
+let lbImgs = [], lbIdx = 0;
+
+function lbOpen(imgs, idx) {
+  lbImgs = imgs;
+  lbIdx  = idx;
+  lbShow();
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function lbShow() {
+  const img = document.getElementById('lb-img');
+  const cap = document.getElementById('lb-cap');
+  img.style.opacity = '0';
+  img.src = lbImgs[lbIdx].src;
+  img.alt = lbImgs[lbIdx].alt;
+  img.onload = () => { img.style.opacity = '1'; };
+  cap.textContent = lbImgs[lbIdx].alt || '';
+  const multi = lbImgs.length > 1;
+  document.getElementById('lb-prev').classList.toggle('vis', multi);
+  document.getElementById('lb-next').classList.toggle('vis', multi);
+}
+
+function lbNav(dir) {
+  event.stopPropagation();
+  lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length;
+  lbShow();
+}
+
+function lbClose() {
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow = '';
+  lbImgs = []; lbIdx = 0;
+}
+
+/* Attach lightbox to all images */
+function initLightbox() {
+  /* Carousel images — grouped per carousel */
+  ['car1','car2','car3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const imgs = Array.from(el.querySelectorAll('.car-slide img'));
+    if (!imgs.length) return;
+    imgs.forEach((img, i) => {
+      img.addEventListener('click', e => {
+        e.stopPropagation();
+        lbOpen(imgs, i);
+      });
+    });
+  });
+
+  /* Academic card images — each opens solo */
+  document.querySelectorAll('.ac-img img').forEach(img => {
+    img.addEventListener('click', () => lbOpen([img], 0));
+  });
+
+  /* Profile photo */
+  const prof = document.querySelector('.photo-outer img');
+  if (prof) prof.addEventListener('click', () => lbOpen([prof], 0));
+}
+
+initLightbox();
+
+/* Keyboard navigation */
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lb');
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lbClose();
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft')  lbNav(-1);
+});
 /* ── ESP32 GRID COLUMN FIX ──────────────────────────────── */
 function fixGrid() {
   const card = document.querySelector('.ac[style*="grid-column"]');
