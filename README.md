@@ -10,7 +10,7 @@ B.E. Electrical Engineering · NUST PNEC · Batch 2024
 
 ## About
 
-Fifth semester EE student at NUST. I build projects rather than just study them.
+EE student at NUST. I build projects rather than just study them.
 Fourteen completed projects across embedded systems, digital logic, analog circuit
 design, power electronics, and electromagnetics. Career interest in industrial
 plant electrical systems and embedded hardware control.
