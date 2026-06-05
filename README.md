@@ -33,7 +33,7 @@ NI Multisim (0.02% error), physically soldered on Vero board, validated against
 bench DMM.
 `Analog Design` `Op-Amp` `NI Multisim` `Vero Board`
 
-### Wireless Charging Tile — First-Principles EM Design
+### Wireless Charging Tile - First-Principles EM Design
 Coil derived analytically from Biot-Savart Law and Faraday's Law (Ulaby 7th Ed.).
 32 transmitter turns deliver 5.04 A at 5 cm separation, 100 kHz, Qi-compatible.
 Python model (NumPy + Matplotlib) generated three parameter-sweep graphs
